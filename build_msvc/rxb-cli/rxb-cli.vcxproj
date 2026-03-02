@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\common.init.vcxproj" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{f4ec8a9f-19fe-4f6e-9772-1293925d9b13}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ConfigurationType>Application</ConfigurationType>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\rxb-cli.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\librxb_cli\librxb_cli.vcxproj">
+      <Project>{4cac325b-3dbe-4652-b362-b278fdd9f5de}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_crypto\librxb_crypto.vcxproj">
+      <Project>{4f531255-856b-4830-9051-73b3ffe6232c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_util\librxb_util.vcxproj">
+      <Project>{5277f4d5-b3b1-4e34-9fe0-46fd33116c18}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libunivalue\libunivalue.vcxproj">
+      <Project>{5724ba7d-a09a-4ba8-800b-c4c1561b3d69}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\common.vcxproj" />
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\common.init.vcxproj" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{906b0922-9e0f-4a1a-ad59-7315e52639dc}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+    <ItemGroup>
+@SOURCE_FILES@
+    <ClCompile Include="..\..\src\wallet\init.cpp">
+      <ObjectFileName>$(IntDir)wallet_init.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\common.vcxproj" />
+</Project>

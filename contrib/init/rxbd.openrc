@@ -1,0 +1,97 @@
+#!/sbin/openrc-run
+
+# RXB OpenRC init script
+# Copyright (c) 2025 The RXB developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/rxb/.rxb" ]; then
+	RXBD_DEFAULT_DATADIR="/var/lib/rxb/.rxb"
+else
+	RXBD_DEFAULT_DATADIR="/var/lib/rxbd"
+fi
+
+RXBD_CONFIGFILE=${RXBD_CONFIGFILE:-/etc/rxb/rxb.conf}
+RXBD_PIDDIR=${RXBD_PIDDIR:-/var/run/rxbd}
+RXBD_PIDFILE=${RXBD_PIDFILE:-${RXBD_PIDDIR}/rxbd.pid}
+RXBD_DATADIR=${RXBD_DATADIR:-${RXBD_DEFAULT_DATADIR}}
+RXBD_USER=${RXBD_USER:-${RXB_USER:-rxb}}
+RXBD_GROUP=${RXBD_GROUP:-rxb}
+RXBD_BIN=${RXBD_BIN:-/usr/bin/rxbd}
+RXBD_NICE=${RXBD_NICE:-${NICELEVEL:-0}}
+RXBD_OPTS="${RXBD_OPTS:-${RXB_OPTS}}"
+
+name="RXB Daemon"
+description="RXB cryptocurrency P2P network daemon"
+
+command="/usr/bin/rxbd"
+command_args="-pid=\"${RXBD_PIDFILE}\" \
+		-conf=\"${RXBD_CONFIGFILE}\" \
+		-datadir=\"${RXBD_DATADIR}\" \
+		-daemon \
+		${RXBD_OPTS}"
+
+required_files="${RXBD_CONFIGFILE}"
+start_stop_daemon_args="-u ${RXBD_USER} \
+			-N ${RXBD_NICE} -w 2000"
+pidfile="${RXBD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${RXBD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${RXBD_USER}:${RXBD_GROUP}" \
+	"${RXBD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${RXBD_USER}:${RXBD_GROUP}" \
+	"${RXBD_PIDDIR}"
+
+	checkpath -f \
+	-o ${RXBD_USER}:${RXBD_GROUP} \
+	-m 0660 \
+	${RXBD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${RXBD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run rxbd."
+		eerror "The setting must appear in ${RXBD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"RXB Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

@@ -1,0 +1,86 @@
+# It is not recommended to modify this file in-place, because it will
+# be overwritten during package upgrades. If you want to add further
+# options or overwrite existing ones then use
+# $ systemctl edit rxbd.service
+# See "man systemd.service" for details.
+
+# Note that almost all daemon options could be specified in
+# /etc/rxb/rxb.conf, but keep in mind those explicitly
+# specified as arguments in ExecStart= will override those in the
+# config file.
+
+# Copyright (c) 2009-2021 The Bitcoin Core developers
+# Copyright (c) 2025 The RXB developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#
+# This file was adapted for RXB based on the original Bitcoin Core
+# systemd service file.
+
+[Unit]
+Description=RXB daemon
+After=network.target
+Documentation=man:rxbd(1) https://github.com/Heiwabitnull/rxb-core
+
+[Service]
+ExecStart=/usr/bin/rxbd -daemon \
+                            -pid=/run/rxbd/rxbd.pid \
+                            -conf=/etc/rxb/rxb.conf \
+                            -datadir=/var/lib/rxbd
+
+# Make sure the config directory is readable by the service user
+PermissionsStartOnly=true
+ExecStartPre=/bin/chgrp rxb /etc/rxb
+
+# Process management
+####################
+
+Type=forking
+PIDFile=/run/rxbd/rxbd.pid
+Restart=on-failure
+TimeoutStopSec=600
+
+# Directory creation and permissions
+####################################
+
+# Run as rxb:rxb
+User=rxb
+Group=rxb
+
+# /run/rxbd
+RuntimeDirectory=rxbd
+RuntimeDirectoryMode=0710
+
+# /etc/rxb
+ConfigurationDirectory=rxb
+ConfigurationDirectoryMode=0710
+
+# /var/lib/rxbd
+StateDirectory=rxbd
+StateDirectoryMode=0710
+
+# Hardening measures
+####################
+
+# Provide a private /tmp and /var/tmp.
+PrivateTmp=true
+
+# Mount /usr, /boot/ and /etc read-only for the process.
+ProtectSystem=full
+
+# Deny access to /home, /root and /run/user
+ProtectHome=true
+
+# Disallow the process and all of its children to gain
+# new privileges through execve().
+NoNewPrivileges=true
+
+# Use a new /dev namespace only populated with API pseudo devices
+# such as /dev/null, /dev/zero and /dev/random.
+PrivateDevices=true
+
+# Deny the creation of writable and executable memory mappings.
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target

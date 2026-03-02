@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\common.init.vcxproj" />
+  <Import Project="..\common.qt.init.vcxproj" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{77045b8c-05b7-404c-b61e-519d6880c4ed}</ProjectGuid>
+    <ConfigurationType>Application</ConfigurationType>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\qt\main.cpp" />
+    <ResourceCompile Include="..\..\src\qt\res\rxb-qt-res.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\librxbconsensus\librxbconsensus.vcxproj">
+      <Project>{4cac325b-3dbe-4652-b362-b278fdd9f5de}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_cli\librxb_cli.vcxproj">
+      <Project>{186c804d-be87-4e99-8c13-3d2d0a46f026}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_common\librxb_common.vcxproj">
+      <Project>{4f531255-856b-4830-9051-73b3ffe6232c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_crypto\librxb_crypto.vcxproj">
+      <Project>{5277f4d5-b3b1-4e34-9fe0-46fd33116c18}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_qt\librxb_qt.vcxproj">
+      <Project>{84c30174-361c-4a81-95fd-abb84ce3df73}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_server\librxb_server.vcxproj">
+      <Project>{906b0922-9e0f-4a1a-ad59-7315e52639dc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_util\librxb_util.vcxproj">
+      <Project>{a2f4bd0b-8e52-4f97-84b0-2de47900ebde}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_wallet\librxb_wallet.vcxproj">
+      <Project>{79bd9a08-8ef0-4785-a6d3-e47055e17926}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_zmq\librxb_zmq.vcxproj">
+      <Project>{277b6069-ded2-479f-be90-8df1b347623b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libleveldb\libleveldb.vcxproj">
+      <Project>{43bbe0f6-2864-40e6-a683-0b14773d5d59}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libsecp256k1\libsecp256k1.vcxproj">
+      <Project>{ced222fc-e2de-47c7-8c6b-1d0641e85a01}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libunivalue\libunivalue.vcxproj">
+      <Project>{936a9a92-0aee-49ee-82aa-1b7f363d48c9}</Project>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(QtIncludes);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(QtReleaseLibraries);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4206</AdditionalOptions>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\src;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(QtIncludes);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(QtDebugLibraries);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4206</AdditionalOptions>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\src;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

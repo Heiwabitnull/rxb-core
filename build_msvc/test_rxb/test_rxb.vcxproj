@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\common.init.vcxproj" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{65a68732-60cd-40c4-828c-852460be1ac3}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\test\*_properties.cpp" />
+    <ClCompile Include="..\..\src\test\*_tests.cpp" />
+    <ClCompile Include="..\..\src\test\gen\*_gen.cpp" />
+    <ClCompile Include="..\..\src\test\main.cpp" />
+    <ClCompile Include="..\..\src\test\util\*.cpp" />
+    <ClCompile Include="..\..\src\wallet\test\*_fixture.cpp" />
+    <ClCompile Include="..\..\src\wallet\test\*_tests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\librxbconsensus\librxbconsensus.vcxproj">
+      <Project>{4cac325b-3dbe-4652-b362-b278fdd9f5de}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_cli\librxb_cli.vcxproj">
+      <Project>{186c804d-be87-4e99-8c13-3d2d0a46f026}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_common\librxb_common.vcxproj">
+      <Project>{4f531255-856b-4830-9051-73b3ffe6232c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_crypto\librxb_crypto.vcxproj">
+      <Project>{5277f4d5-b3b1-4e34-9fe0-46fd33116c18}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_server\librxb_server.vcxproj">
+      <Project>{906b0922-9e0f-4a1a-ad59-7315e52639dc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_util\librxb_util.vcxproj">
+      <Project>{a2f4bd0b-8e52-4f97-84b0-2de47900ebde}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_wallet\librxb_wallet.vcxproj">
+      <Project>{79bd9a08-8ef0-4785-a6d3-e47055e17926}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_zmq\librxb_zmq.vcxproj">
+      <Project>{277b6069-ded2-479f-be90-8df1b347623b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libtest_util\libtest_util.vcxproj">
+      <Project>{93eb3089-4e69-4b82-ac76-d2ec4660a199}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libunivalue\libunivalue.vcxproj">
+      <Project>{936a9a92-0aee-49ee-82aa-1b7f363d48c9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libsecp256k1\libsecp256k1.vcxproj">
+      <Project>{ced222fc-e2de-47c7-8c6b-1d0641e85a01}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libleveldb\libleveldb.vcxproj">
+      <Project>{43bbe0f6-2864-40e6-a683-0b14773d5d59}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Target Name="RawBenchHeaderGen" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>There was an error executing the JSON test header generation task.</ErrorText>
+    </PropertyGroup>
+    <ItemGroup>
+      <JsonTestFile Include="..\..\src\test\data\*.json" />
+      <RawTestFile Include="..\..\src\test\data\*.raw" />
+    </ItemGroup>
+    <HeaderFromHexdump RawFilePath="%(RawTestFile.FullPath)" HeaderFilePath="%(RawTestFile.FullPath).h" SourceHeader="static unsigned const char %(RawTestFile.Filename)_raw[] = {" SourceFooter="};" />
+    <HeaderFromHexdump RawFilePath="%(JsonTestFile.FullPath)" HeaderFilePath="%(JsonTestFile.FullPath).h" SourceHeader="namespace json_tests{ static unsigned const char %(JsonTestFile.Filename)[] = {" SourceFooter="};}" />
+  </Target>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Label="hexdumpTarget" Project="..\msbuild\tasks\hexdump.targets" />
+  <Import Project="..\common.vcxproj" />
+</Project>

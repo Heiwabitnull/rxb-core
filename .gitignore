@@ -1,0 +1,25 @@
+# Skompilowane binarki
+src/rxbd
+src/rxb-cli
+src/rxb-tx
+src/rxb-wallet
+src/qt/rxb-qt
+src/.libs/
+*.o
+*.a
+*.so
+*.so.*
+*.exe
+
+# Build artifacts
+config.log
+config.status
+autom4te.cache/
+libtool
+Makefile
+librxbconsensus.pc
+
+# Dane node
+*.dat
+*.log
+*.pid

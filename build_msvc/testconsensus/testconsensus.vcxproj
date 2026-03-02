@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\common.init.vcxproj" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{67294de1-b597-44e9-acf4-abd91978f6fc}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="testconsensus.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\librxbconsensus\librxbconsensus.vcxproj">
+      <Project>{4cac325b-3dbe-4652-b362-b278fdd9f5de}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\librxb_util\librxb_util.vcxproj">
+      <Project>{a2f4bd0b-8e52-4f97-84b0-2de47900ebde}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libsecp256k1\libsecp256k1.vcxproj">
+      <Project>{ced222fc-e2de-47c7-8c6b-1d0641e85a01}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="..\common.vcxproj" />
+</Project>
