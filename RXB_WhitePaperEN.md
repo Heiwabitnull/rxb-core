@@ -90,7 +90,7 @@ Process of creating address consists of public key being processed through SHA-2
 Result of this processing is then processed through RIPEMD-160 function.
 
 Hash obtained in this way is encoded into user readable text format.
-For example starting with ebx1 for Segregated Witness type addresses.
+For example starting with rxb for Segregated Witness type addresses.
 
 Address is public identifier to which coins can be received and it does not directly contain public key 
 which constitutes additional security layer.
@@ -424,7 +424,7 @@ User bears full responsibility for their decisions and compliance of their actio
 
 with law applicable in their jurisdiction.
 
-Project website rxb.org
+Project website rxbcore.org
 
 Source code repository https://github.com/Heiwabitnull/rxb.git
 
@@ -448,5 +448,4 @@ Simply each entry uses a separate address in the UTXO model every record remains
 
 I wish you success in mining. 
 
-Be good and do good.
-
+Be good and do good
