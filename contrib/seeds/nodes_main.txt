@@ -9,3 +9,4 @@
 
 # IPv6 seeds (community can add later)
 # [2001:db8::1]:8327
+[2a02:8108:94a1:9400:c69e:6172:2fcc:a539]:8327
