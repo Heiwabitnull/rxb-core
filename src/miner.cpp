@@ -796,12 +796,18 @@ UniValue setgenerate(const JSONRPCRequest& request) {
 
 
 // Register RPC commands
+extern UniValue submitblock(const JSONRPCRequest& request);
+extern UniValue submitheader(const JSONRPCRequest& request);
+extern UniValue getblocktemplate(const JSONRPCRequest& request);
 static const CRPCCommand commands[] = {
     //  category              name                      actor (function)         argNames
     //  --------------------- ------------------------  -----------------------  ----------
     { "mining",             "startmining",            &startmining,            {"address","threads"} },
     { "mining",             "stopmining",             &stopmining,             {} },
     { "mining",             "getmininginfo",          &getmininginfo,          {} },
+    { "mining",             "getblocktemplate",       &getblocktemplate,       {"template_request"} },
+    { "mining",             "submitblock",            &submitblock,            {"hexdata","dummy"} },
+    { "mining",             "submitheader",           &submitheader,           {"hexdata"} },
     { "mining",             "setgenerate",            &setgenerate,            {"generate","genproclimit"} },
 };
 
