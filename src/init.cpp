@@ -574,7 +574,7 @@ std::string LicenseInfo()
                URL_SOURCE_CODE) +
            "\n" +
            "\n" +
-           _("This is experimental software.").translated + "\n" +
+           _("This is open source software.").translated + "\n" +
            strprintf(_("Distributed under the MIT software license, see the accompanying file %s or %s").translated, "COPYING", "<https://opensource.org/licenses/MIT>") +
            "\n";
 }

@@ -1,9 +1,9 @@
 # Security Policy
 ## Version
-This is an experimental version 0.1.0 of RXB-core. 
+This is an  version 0.2.0 of RXB-core. 
 Use at your own risk.
 ## Reporting
-At this stage RXB is simply experimental but its alive.
+At this stage RXB is simply  but its alive.
 Developers researchers and contributors are encouraged to propose 
 improvements and fixes submit patches that improve RXB.
 The system was designed by Heiwabit as a hardfork and the development 

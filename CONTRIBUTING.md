@@ -2,7 +2,7 @@
 ============================
 
 
- RXB is an experimental cryptocurrency project 
+ RXB is an  cryptocurrency project 
  focused on providing a decentralized peer-to-peer digital currency system. 
  This document explains how you can contribute to the RXB network
  specifically by adding seed nodes.
@@ -69,7 +69,7 @@ To add a new seed node to the RXB network:
 
   Important  
   
-  RXB is currently in experimental/development phase. 
+  RXB is currently in /development phase. 
   
   The code is provided "as-it is!" without warranty of any kind.
 
@@ -160,7 +160,7 @@ Community Channels
 
    Warning!
  
-   RXB is experimental software.
+   RXB is  software.
  
    Use at your own risk.
  
@@ -200,4 +200,4 @@ Community Channels
   Anyone with a VPS is encouraged to support the network by running bridge nodes
   to help prevent network splits and improve connectivity.
 
-  ### Record XCore Blockchain (RXB)  version: 0.1.0-experimental###
+  ### Record XCore Blockchain (RXB)  version: 0.2.0

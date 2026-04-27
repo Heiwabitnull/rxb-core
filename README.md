@@ -14,7 +14,7 @@ RXBWin for Windows builds and RXBLinux for Linux builds.
 
 ## Overview
 
-RXB is an experimental digital currency system based 
+RXB is a digital currency system based 
 on Bitcoin technology. 
 Block size is set to 6 megabytes and 
 OP_RETURN allows up to 300 bytes for data messages. 

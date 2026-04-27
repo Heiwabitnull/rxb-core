@@ -2,7 +2,7 @@
 // RXB developers 2025
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-// Adapted for RXB hardfork 2025
+// Adapted for RXB in 2025
 
 #include <iostream>
 
