@@ -48,6 +48,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast,
 {
     assert(pindexLast != nullptr);
 
+    // v0.3.0 Foxbat: Bitcoin-style retarget activates at block 4848
+    // Blocks before 4848 were mined under LWMA - preserve their nBits unchanged
+    if (pindexLast->nHeight + 1 < 4848)
+        return pindexLast->nBits;
+
     // Only retarget once per adjustment interval (every 2016 blocks)
     if ((pindexLast->nHeight + 1) % params.DifficultyAdjustmentInterval() != 0)
         return pindexLast->nBits;
