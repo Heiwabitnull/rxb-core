@@ -3,6 +3,13 @@
 
 
 ### v0.3.0 Foxbat - April 2026
+### Network
+Onion seed nodes have been removed from chainparams to ensure stable clearnet network growth.
+The only hardcoded seed is the public clearnet bridge at 135.181.255.219:8327.
+Onion seed nodes previously announced on BitcoinTalk forum remain operational and can be added manually 
+via addnode in rxb.conf.
+They will be maintained for approximately six months before being decommissioned.
+
 
 
 ### Consensus

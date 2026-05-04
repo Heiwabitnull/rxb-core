@@ -449,3 +449,37 @@ Simply each entry uses a separate address in the UTXO model every record remains
 I wish you success in mining. 
 
 Be good and do good
+
+
+===============================================================================
+Annex: Protocol Updates
+===============================================================================
+
+RXBcore v0.3.0 Foxbat - April 2026
+
+Network
+
+The hardcoded seed node list has been updated to contain only the public
+clearnet bridge at 135.181.255.219:8327. 
+This change supports stable clearnet network growth and lowers the barrier to entry for new node
+operators who do not run Tor. 
+Previously announced onion seed nodes remain operational and may be added manually via addnode in rxb.conf.
+They will be maintained for approximately six months.
+
+Consensus
+
+The LWMA per-block difficulty algorithm has been removed and replaced
+with the classical Bitcoin-style retarget mechanism operating over a
+window of 2016 blocks. 
+The asymmetric clamp is applied at each retarget
+interval. Difficulty may increase by no more than two percent per window
+and may decrease by up to fifty five percent per window. This arrangement
+makes hashrate-rental attacks economically unviable. To double the
+difficulty an attacker would need to sustain elevated hashrate
+continuously for roughly 490 days across 35 retarget windows. Should
+hashrate fall the network recovers within a single retarget interval.
+The target block spacing remains ten minutes consistent with Bitcoin.
+
+Be good and do good
+
+Heiwabitnull 
