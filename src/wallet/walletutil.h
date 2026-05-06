@@ -26,7 +26,8 @@ enum WalletFeature
 
     FEATURE_PRE_SPLIT_KEYPOOL = 169900, // Upgraded to HD SPLIT and can have a pre-split keypool
 
-    FEATURE_LATEST = FEATURE_PRE_SPLIT_KEYPOOL
+    RXB_KEYPOOL_RESET = 199300,  // jednorazowy reset keypool po aktualizacji
+    FEATURE_LATEST = RXB_KEYPOOL_RESET
 };
 
 

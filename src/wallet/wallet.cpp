@@ -4135,6 +4135,18 @@ const CAddressBookData* CWallet::FindAddressBookEntry(const CTxDestination& dest
 
 void CWallet::postInitProcess()
 {
+
+    if (!CanSupportFeature(RXB_KEYPOOL_RESET)) {
+        WalletLogPrintf("Resetting keypool due to new fork or wallet version change\n");
+        for (auto& spk_man_pair : m_spk_managers) {
+            LegacyScriptPubKeyMan* legacy_spk_man = dynamic_cast<LegacyScriptPubKeyMan*>(spk_man_pair.second.get());
+            if (legacy_spk_man) {
+                legacy_spk_man->ClearKeyPool();
+                legacy_spk_man->TopUp();
+            }
+        }
+        SetMinVersion(RXB_KEYPOOL_RESET);
+    }
     auto locked_chain = chain().lock();
     LOCK(cs_wallet);
 

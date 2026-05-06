@@ -331,6 +331,7 @@ public:
     void ReturnDestination(int64_t index, bool internal, const CTxDestination&) override;
 
     bool TopUp(unsigned int size = 0) override;
+    void ClearKeyPool();
 
     void MarkUnusedAddresses(const CScript& script) override;
 
